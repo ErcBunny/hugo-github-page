@@ -1,0 +1,12 @@
+[submodule "themes/next"]
+	path = themes/next
+	url = https://github.com/elkan1788/hugo-theme-next.git
+[submodule "themes/stack"]
+	path = themes/stack
+	url = https://github.com/CaiJimmy/hugo-theme-stack.git
+[submodule "themes/diary"]
+	path = themes/diary
+	url = https://github.com/AmazingRise/hugo-theme-diary.git
+[submodule "public"]
+	path = public
+	url = https://github.com/ErcBunny/ercbunny.github.io.git
