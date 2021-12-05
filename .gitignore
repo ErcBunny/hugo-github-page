@@ -1,2 +1,3 @@
 resources/_gen
 *.lock
+.DS_Store
