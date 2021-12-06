@@ -181,16 +181,28 @@ menu:
     
     social:
         - identifier: github
-          name: GitHub
+          name: 1-GitHub
           url: https://github.com/ErcBunny
           params:
             icon: brand-github
             
         - identifier: twitter
-          name: Twitter
+          name: 2-Twitter
           url: https://twitter.com
           params:
             icon: brand-twitter
+
+        - identifier: bilibili
+          name: 3-BiliBili
+          url: https://space.bilibili.com/16031917
+          params:
+            icon: icon-bilibili
+
+        - identifier: qzone
+          name: 4-qzone
+          url: https://user.qzone.qq.com/846524026/main
+          params:
+            icon: icon-qzone  
 
 related:
     includeNewer: true
