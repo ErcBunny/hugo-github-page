@@ -176,8 +176,17 @@ menu:
           weight: -100
           params:
               ### For demonstration purpose, the home link will be open in a new tab
-              newTab: true
+              newTab: false
               icon: home
+
+        - identifier: about
+          name: About
+          url: /about
+          weight: 0
+          params:
+              ### For demonstration purpose, the home link will be open in a new tab
+              newTab: false
+              icon: user
     
     social:
         - identifier: github
