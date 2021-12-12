@@ -16,31 +16,37 @@ hidden: true
 * Mailbox: yueqianliu@outlook.com
 * QQ: 846524026
 * Wechat: E846524026
-* Mobile: +86-18680286879
+* Mobile: (+86)18680286879
 
 ### Overview of Me
 * Location: Shenzhen and Guangzhou
-* Hometown: Changsha (2000)
+* Hometown: Changsha
 * Research Interest: Robotics, Control, Perception, AI, Drones
-* Love anime, music and a lot more
+* Hobbies: Anime, music and a lot more
 
 ### About This Page
 * Based on Github Pages and Hugo framework
-* I initially want it to be an online self-introduction in support of my graduation application. But I think it can be more than just that...
-* Thanks to Jimmy for creating this beautiful theme and allowing people without WEB/UI/Frontend experience to build such a nice website
-
+* I initially want it to be an online self-introduction to help with graduation application. But I think it can be more than just that...
+* Thanks to Jimmy for creating this beautiful theme and allowing people without WEB experience to build such a nice website
+* useful links:
+    * https://docs.stack.jimmycai.com/zh/configuration/
+    * https://gohugo.io/content-management/organization/
+    * https://www.iconfont.cn/
 ---
 ## EDUCATION
 
-### Harbin Institute of Technology, Shenzhen (09/2018 ~ 06/2022)
-* Currently a fourth year student
+### Harbin Institute of Technology, Shenzhen
+* Currently a fourth year student (09/2018 ~ 06/2022)
 * BEng. in Robotics and Autonomous Systems at graduation
 * Admitted to UCB Global Access Program, but cancelled due to COVID
-* GPA: 88/100, TOEFL: 110/120
+* GPA: 88/100
+* TOEFL: 110/120, GRE: 160(V)+168(Q)+4(AW)
 
-### Guangdong Experimental High School (09/2015 ~ 06/2018)
+### Guangdong Experimental High School
+* (09/2015 ~ 06/2018)
 * In D14 during the first year
 * In E3 during the rest of the time
+* Ranked about 4000 in NMET 
 
 ---
 ## AWARDS
