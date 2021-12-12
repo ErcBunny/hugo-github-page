@@ -34,8 +34,8 @@ params:
         customText:
 
     dateFormat:
-        published: Dec 05, 2021
-        lastUpdated: Dec 05, 2021 16:30 MST
+        published: 
+        lastUpdated: 
 
     sidebar:
         emoji: 😄
@@ -175,7 +175,6 @@ menu:
           url: /
           weight: -100
           params:
-              ### For demonstration purpose, the home link will be open in a new tab
               newTab: false
               icon: home
 
@@ -184,9 +183,17 @@ menu:
           url: /about
           weight: 0
           params:
-              ### For demonstration purpose, the home link will be open in a new tab
               newTab: false
               icon: user
+
+        - identifier: posts
+          name: Posts
+          url: /post
+          weight: 100
+          params:
+              newTab: false
+              icon: post
+
     
     social:
         - identifier: github
