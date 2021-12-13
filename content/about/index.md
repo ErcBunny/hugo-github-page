@@ -7,6 +7,7 @@ image: cover.png
 comments: false
 license: false
 hidden: true
+toc: false
 ---
 
 ---
@@ -81,7 +82,7 @@ hidden: true
 * Janpaness: begineer
 
 ---
-## HOBBIES | ACTIVITIES
+## OTHERS
 ### Sports
 * Badminton
 * Swimming

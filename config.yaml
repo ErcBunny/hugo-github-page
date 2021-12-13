@@ -48,7 +48,7 @@ params:
     article:
         math: true
         toc: true
-        readingTime: true
+        readingTime: false
         license:
             enabled: true
             default: Licensed under CC BY-NC-SA 4.0
@@ -181,7 +181,7 @@ menu:
         - identifier: about
           name: About
           url: /about
-          weight: 0
+          weight: 10000
           params:
               newTab: false
               icon: user
@@ -189,11 +189,18 @@ menu:
         - identifier: posts
           name: Posts
           url: /post
-          weight: 100
+          weight: -80
           params:
               newTab: false
               icon: post
 
+        - identifier: focus
+          name: Focus
+          url: /focus
+          weight: -70
+          params:
+              newTab: false
+              icon: flag
     
     social:
         - identifier: github
