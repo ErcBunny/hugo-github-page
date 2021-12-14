@@ -27,7 +27,7 @@ toc: false
 
 ### About This Page
 * Based on Github Pages and Hugo framework
-* I initially want it to be an online self-introduction to help with graduation application. But I think it can be more than just that...
+* I initially want it to be an online self-introduction to help with graduation application: it feels better updating websites than frequently editing and exporting [**CV**](https://github.com/ErcBunny/sharedDocs/raw/main/CV-yueqian-en.pdf) and [**project description**](https://github.com/ErcBunny/sharedDocs/raw/main/Project%20Experience.pptx). But I think it can be more than just that...
 * Thanks to Jimmy for creating this beautiful theme and allowing people without WEB experience to build such a nice website
 * useful links:
     * https://docs.stack.jimmycai.com/zh/configuration/
