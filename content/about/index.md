@@ -79,7 +79,7 @@ toc: false
 * Mandarin: native
 * English: fluent
 * Cantoness: intermediate
-* Janpaness: begineer
+* Janpaness: beginer
 
 ---
 ## OTHERS
