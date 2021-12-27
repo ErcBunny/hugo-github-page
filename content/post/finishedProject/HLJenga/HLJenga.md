@@ -1,6 +1,6 @@
 ---
 title: "HLJenga: Hexalink Jenga Manipulator"
-date: 2021-12-13T15:24:52+08:00
+date: 2021-07-01T15:24:52+08:00
 draft: false
 description: A Hexalink Manipulator Plays Jenga, Coursework (2021)
 image: /post/finishedProject/HLJenga/cover.png
@@ -8,9 +8,10 @@ comments: true
 license: false
 hidden: false
 categories:
-    - Finished Project
+    - Finished_Project
 tags:
-    - Manipulator
+    - MANIPULATOR
+     
 ---
 
 ---

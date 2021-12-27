@@ -1,0 +1,42 @@
+---
+title: "Focus"
+date: 2021-12-13T17:21:54+08:00
+draft: false
+description: See what I am up to recently~
+image: /page/focusCover.jpg
+comments: false
+license: false
+hidden: true
+toc: false
+menu:
+    main:
+        weight: 20
+        params:
+            icon: flag
+---
+
+> [**My Live Schedule**: scroll down to the bottom for recent updates (depend on onedrive service)](https://1drv.ms/b/s!AtUoQjeuHMpig74BT-WKhKnwRrszmA?e=ooMkLr)
+
+---
+## BACHELOR THESIS
+
+* Adaptive Model Predictive Control of A Overactuated Hexacopter
+
+* We're working on a private repo, it will go public someday
+
+---
+## DRL AUTOPILOT
+
+* [Open Source Repo](https://github.com/ErcBunny/DRL-Autopilot)
+
+* The post for tracking its progress is currently unavailable. Please go to the repo for more information.
+
+---
+## GRADUATE SCHOOL APPLICATION
+
+* Deadlines are approaching... Working hard on it.
+
+---
+## PREPARE FOR THE FINAL EXAM
+
+* **Introduction to auto mobile robots**... The final exam is scheduled on Dec.31

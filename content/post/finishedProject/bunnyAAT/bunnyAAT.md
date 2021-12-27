@@ -1,6 +1,6 @@
 ---
 title: "BunnyAAT"
-date: 2021-12-13T10:19:16+08:00
+date: 2018-09-14T10:19:16+08:00
 draft: false
 description: An Auto Antenna Tracker Built in Aug 2018
 image: /post/finishedProject/bunnyAAT/cover.png
@@ -8,9 +8,10 @@ comments: true
 license: false
 hidden: false
 categories:
-    - Finished Project
+    - Finished_Project
 tags:
     - AAT
+     
 ---
 
 ---

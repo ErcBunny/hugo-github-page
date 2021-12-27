@@ -1,6 +1,6 @@
 ---
 title: "A 3-Rotor VTOL UAV"
-date: 2021-12-13T13:20:21+08:00
+date: 2019-08-15T13:20:21+08:00
 draft: false
 description: A project for The Freshman Year Innovation Program of HITSZ (2019)
 image: /post/finishedProject/TriVTOL/cover.png
@@ -8,10 +8,11 @@ comments: true
 license: false
 hidden: false
 categories:
-    - Finished Project
+    - Finished_Project
 tags:
     - VTOL
     - UAV
+     
 ---
 
 ---

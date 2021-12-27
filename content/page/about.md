@@ -3,11 +3,16 @@ title: About
 date: 2021-12-06T16:32:16+08:00
 draft: false
 description: Some basic information about me and my page.
-image: cover.png
+image: /page/cover.png
 comments: false
 license: false
 hidden: true
-toc: false
+toc: true
+menu:
+    main:
+        weight: 100000
+        params:
+            icon: user
 ---
 
 ---
@@ -30,9 +35,10 @@ toc: false
 * I initially want it to be an online self-introduction to help with graduation application: it feels better updating websites than frequently editing and exporting [**CV**](https://github.com/ErcBunny/sharedDocs/raw/main/CV-yueqian-en.pdf) and [**project description**](https://github.com/ErcBunny/sharedDocs/raw/main/Project%20Experience.pptx). But I think it can be more than just that...
 * Thanks to Jimmy for creating this beautiful theme and allowing people without WEB experience to build such a nice website
 * useful links:
-    * https://docs.stack.jimmycai.com/zh/configuration/
-    * https://gohugo.io/content-management/organization/
-    * https://www.iconfont.cn/
+    * [theme stack documentation](https://docs.stack.jimmycai.com/zh/configuration/)
+    * [hugo documentation](https://gohugo.io/content-management/organization/)
+    * [icon download page](https://www.iconfont.cn/)
+    * [theme stack example](https://demo.stack.jimmycai.com/)
 ---
 ## EDUCATION
 
@@ -47,7 +53,7 @@ toc: false
 * (09/2015 ~ 06/2018)
 * In D14 during the first year
 * In E3 during the rest of the time
-* Ranked about 4000 in NMET 
+* Ranked about 4000 in **Nationwide Unified Examination for Admissions to General Universities and Colleges**
 
 ---
 ## AWARDS

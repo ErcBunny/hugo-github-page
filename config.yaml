@@ -1,4 +1,4 @@
-baseurl: https://example.com
+baseurl: https://ercbunny.github.io
 languageCode: en-us
 theme: stack
 paginate: 5
@@ -27,7 +27,7 @@ params:
         - post
     featuredImageField: image
     rssFullContent: true
-    favicon:
+    favicon: /img/user.svg
 
     footer:
         since: 2021
@@ -39,7 +39,7 @@ params:
 
     sidebar:
         emoji: 😄
-        subtitle: Welcome~٩(˃̶͈̀௰˂̶͈́)و
+        subtitle: Welcome٩(˃̶͈̀௰˂̶͈́)و
         avatar:
             enabled: true
             local: true
@@ -133,10 +133,10 @@ params:
             - tag-cloud
 
         archives:
-            limit: 5
+            limit: 10
 
         tagCloud:
-            limit: 10
+            limit: 20
 
     opengraph:
         twitter:
@@ -177,30 +177,6 @@ menu:
           params:
               newTab: false
               icon: home
-
-        - identifier: about
-          name: About
-          url: /about
-          weight: 10000
-          params:
-              newTab: false
-              icon: user
-
-        - identifier: posts
-          name: Posts
-          url: /post
-          weight: -80
-          params:
-              newTab: false
-              icon: post
-
-        - identifier: focus
-          name: Focus
-          url: /focus
-          weight: -70
-          params:
-              newTab: false
-              icon: flag
     
     social:
         - identifier: github
@@ -222,7 +198,7 @@ menu:
             icon: icon-bilibili
 
         - identifier: qzone
-          name: 4-qzone
+          name: 4-Qzone
           url: https://user.qzone.qq.com/846524026/main
           params:
             icon: icon-qzone  

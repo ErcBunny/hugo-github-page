@@ -58,9 +58,7 @@ tags:
 >
 > [要你命3000词表.xlsx](https://github.com/ErcBunny/sharedDocs/raw/main/要你命3000词表.xlsx)
 
-* 对我帮助比较大的是刷题。把考满分（还挺好用，比雷哥网的网页写得好，评论区也好玩，link看下面）的经典填空题至少刷完90个小节，当然越多越好，但是刷完90也基本差不多了。10min一个小节，不能再多了，顺便要注意练习节奏。阅读也可以做，但我自己的阅读还可以就放养了……模考可以用来练习整体节奏，我是把base+medium和hard以及KAPLAN下面popular的给做了
-
-> https://gre.kmf.com
+* 对我帮助比较大的是刷题。把[考满分](https://gre.kmf.com)（还挺好用，比雷哥网的网页写得好，评论区也好玩）的经典填空题至少刷完90个小节，当然越多越好，但是刷完90也基本差不多了。10min一个小节，不能再多了，顺便要注意练习节奏。阅读也可以做，但我自己的阅读还可以就放养了……模考可以用来练习整体节奏，我是把base+medium和hard以及KAPLAN下面popular的给做了
 
 ### Quantitative
 
@@ -71,10 +69,7 @@ tags:
 
 * 基本观点是，逻辑清晰为上，结构直白就行，不求perfect，但求good和properly written，关键是自圆其说
 * 30min能写得越多越好，但在此之前结构完整更重要（不要虎头蛇尾）
-* 可以参考这个油主的一些视频，可以获得最基本的一些概念
-
-> https://www.youtube.com/watch?v=OFa8oeXXuoA
-
+* 可以参考这个油主的[一些视频](https://www.youtube.com/watch?v=OFa8oeXXuoA)，可以获得最基本的一些概念
 * Issue（论点+论据）：
   1. 第一段=背景（题干信息）+我的论点+描述文章结构
   2. body几段的每一段（也就是为什么）=中心论点+阐述逻辑+例子+回扣论点
