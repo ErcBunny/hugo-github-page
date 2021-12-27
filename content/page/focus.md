@@ -20,7 +20,7 @@ menu:
 ---
 ## BACHELOR THESIS
 
-* [Adaptive Model Predictive Control of A Overactuated Hexacopter](/p/omnihex)
+* [Adaptive Model Predictive Control of An Overactuated Hexacopter](/p/omnihex)
 
 * We're working on a private repo, it will go public someday
 
