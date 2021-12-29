@@ -23,6 +23,6 @@ tags:
 ---
 ## LINKS
 
-* [Presentation Of Previous Work (English)](https://github.com/ErcBunny/sharedDocs/raw/main/Project%20Experience.pptx)
+* [Presentation of Previous Work (English)](https://github.com/ErcBunny/sharedDocs/raw/main/Project%20Experience.pptx)
 
 * [Research Proposal (Chinese)](https://github.com/ErcBunny/sharedDocs/raw/main/omnihex.pdf)

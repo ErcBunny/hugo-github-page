@@ -39,4 +39,4 @@ menu:
 ---
 ## PREPARE FOR THE FINAL EXAM
 
-* **Introduction to auto mobile robots**... The final exam is scheduled on Dec.31
+* [**Introduction to auto mobile robots**](/p/notes-for-introduction-to-autonomous-mobile-robots/)... The final exam is scheduled on Dec.31
