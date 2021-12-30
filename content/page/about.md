@@ -58,16 +58,22 @@ menu:
 ---
 ## AWARDS
 ### 2021
-* Third Prize, Outstanding Student Scholarship, HITSZ
+* [Second Prize, HITSZ Engineering Contest in Drone Delivery, Mar 2021](/p/autonomous-delivery-drone)
+* Third Prize RMB2000, HITSZ Outstanding Student Scholarship, Nov 2021
 ### 2020
-* Second Prize, Robomaster Championship
-* First Prize, Freshman Year Innovation Program Award, HITSZ
-* First Prize, National Undergraduate Electronic Design Contest, Guangdong
-* Third Prize, China Undergraduate Mathematical Contest in Modeling, Guangdong 
-* Second Prize, Outstanding Student Scholarship, HITSZ
+* Second Prize, National ROBOMASTER Championship, Aug 2020
+* [First Prize, Student Innovation Project Assessment, Oct 2020](/p/a-3-rotor-vtol-uav/)
+* First Prize, National Undergraduate Electronics Design Contest, Nov 2020
+* Second Prize RMB4000, HITSZ Outstanding Student Scholarship, Dec 2020
+* Third Prize, National Mathematical Contest in Modeling, Dec 2020
 ### 2019
-* Third Prize, National English Competition for College Students
-* First Prize, The Great Bay Area Engineering Training Integration Ability Competition
+* Third Prize, National English Competition for College Students, May 2019
+* First Prize, National Undergraduate Engineering Training Integration Ability Competition, Oct 2019
+* Third Prize RMB2000, HITSZ Outstanding Student Scholarship, Nov 2019
+### 2018
+* Second Prize, HITSZ Hackathon Event, Dec 2018
+
+> [Certificates in Chronological Order](https://1drv.ms/b/s!AtUoQjeuHMpig74s74hvZU29JQ9rXQ?e=F2Xzlf)
 
 ---
 ## SKILLS

@@ -12,6 +12,8 @@ categories:
 tags:
 ---
 
+> 篇幅较长，请先浏览目录，方便导航哦～
+
 ---
 ## 绪论
 
@@ -28,7 +30,7 @@ tags:
 * 医疗手术
 * 家庭
 
-### 几个概念
+### 自动化
 * 自主性(autonomy)是行为主体按自己意愿行事的动机、能力或特性
     * 自主移动机器人是一类可以根据任务需求、具有在单维或多维空间主动改变自身位姿以及空间位置能力的机器人统称
     * 自动驾驶分级：0-2级需要驾驶员实时介入，自动驾驶提供辅助速度和车道控制；3级有时会要求接管驾驶，4级开始是在特定环境下完全自主，5级是所有环境下全自主
@@ -149,7 +151,7 @@ tags:
 
 > 只考虑运动学控制，仅分析二轮差速小车
 
-### 概念和零碎知识点
+### 术语和零碎知识点
 * 定点(镇定)控制Regulation Control：以指定姿态到达指定工作位置
 * 路径跟踪控制Path Tracking Control：跟随给定路线
 * 轨迹跟踪控制Trajectory Tracking Control：跟随给定的轨迹
@@ -208,10 +210,6 @@ tags:
 * $q_r$ 这时候是规定的一条轨迹了，类似上面的定点控制
 * 更高级的在这里有[「横向自动控制方法：Purepursuit, Stanley, MPC对比」](https://blog.csdn.net/weixin_46723764/article/details/108885265)
 
-
-### 路径跟踪控制
-* 课程内容不具有普遍参考意义，摆了罢
-
 ---
 ## 规划
 
@@ -261,4 +259,246 @@ tags:
 ![范数](/post/note/mobileRobot/norm.png)
 
 * Probabilistic Roadmaps (PRM, 1996)
+    * 特性
+        * 为multiple-queries设计，允许大量预先计算
+        * 对于single-query问题则可以省略一些预先计算来加速
+        * 先全图采样完再寻找一条路径
+    * 主要步骤
+        1. 在空间中sample一堆没有碰撞的点
+        2. 用这些点构造一个图，包括碰撞检测
+        3. 使用A*做搜索
+    * 限制
+        * 限制为完整约束运动
+        * 窄通道无视问题
+        * 动态环境不适用
 * Rapidly-exploring random trees (RRT, 1998)
+    * 不断生长的树，而不是把全部空间都采样完
+    * designed for single-query search
+    * 适用于非完整性约束运动和动态环境，比PRM更容易整合控制和运动学约束
+    * 可用于高维空间问题，无需几何划分，可以尽可能的探索未知区域
+    * 改进型
+        * Goal-Bias：将目标节点作为采样点出现，可以控制目标点出现的概率
+        * Extend RRT：引入路径点集合，加快了收敛速度，提高了路径的稳定性
+        * RRT-Connect：初始点和目标点生成两棵树，直到两棵树连在一起算法收敛
+        * Local-tree-RRT：对随机采样算法狭窄通道难以迅速通过的问题，提出局部树方法加以解决
+        * Dynamic RRT：提出了修剪和合并操作，去除掉无效的节点后再继续进行搜索
+
+### 局部规划（避障）
+* BUG算法
+* 动态窗口：认为一小段时间内twist恒定
+
+### 势场法
+* 主要思想：避免层级结构，同时考虑全局和局部路径，建立一个全局势能场，机器人自动沿着最大梯度方向下降到目标点
+* 一种常见的实现：总场=目标场+障碍场
+
+![目标场](/post/note/mobileRobot/goal.png)
+
+![障碍场](/post/note/mobileRobot/obs.png)
+
+![总势场](/post/note/mobileRobot/total.png)
+
+---
+## 传感器大类和指标
+
+### 分类
+![](/post/note/mobileRobot/sensor1.png)
+![常见传感器](/post/note/mobileRobot/sensor2.png)
+
+### 常见传感器的原理
+*  rangefinder
+    * TOF
+        * sonar
+        * lidar
+    * RSS
+* infra-red：发光二极管发出包括红外的光，由物体反射，传感器接收检测强度
+
+### 主要性能指标
+* 动态范围
+* 测量范围
+* 分辨率
+* 线性度
+* 频率/带宽
+* 误差
+    * 系统误差由理论上可建模的因素或过程造成，是确定性的（deterministic 知道解析形式的），可测的
+
+### 标定和不确定性
+* 标定：确定一个从传感器读数到有意义数据的映射
+    1. 获得ground truth和测试数据
+    2. 拟合模型
+* 不确定性一般处理办法
+    * 储存测试值和准确值的pair
+    * 获得确定性变换模型
+    * 获得概率模型（比如假设高斯分布）
+        * 可以用平均值（第一moment）和方差（第二moment）
+        * 贝叶斯公式
+
+---
+## 基于视觉的感知
+
+### CV的常见应用 
+* 语义分割
+* 图像分类
+* 目标检测
+* 实例分割
+* 目标追踪
+* 三维重建
+
+### 相机图像获取
+* 小孔成像->光圈虚化原理->使用透镜
+* 小孔成像与透视原理
+    * radial distortion
+    * intrinsic calibration: Use camera model to interpret the projection from world to image plane
+        * To estimate 11 unknowns, we need at least 6 points to calibrate the camera (linear least squares)
+
+### 数字图像处理
+* 相关和卷积，都是对应位置相乘之后相加，但是卷积的核要倒过来，但是因为图像处理中基本是对称的，所以区别不大
+* 空间滤波基础（模糊和锐化）
+* 边缘检测，一阶和二阶导数的区别，如果加入了高斯模糊，则一阶对应用gussian一阶导DOG卷原图，二阶对应LOG卷原图
+* 图像匹配
+    * normalized cross correlation
+    * zero-mean correlation
+    * dot product
+
+### 立体视觉
+* Triangulation：给出一组对应的图像坐标和相机位置，确定像素对应点的3D位置
+    * geometric approach
+    * linear approach
+    * non-linear approach
+* Stereo camera
+    * 标定：外参数（relative pose between the cameras (rotation, translation)）；内参数（focal length, optical center, radial distortion）
+    * 像素匹配
+        * Epipolar Constraint
+            1. Epipolar rectification: warps image pairs into new “rectified” images, whose epipolar lines are parallel & collinear (aligned to the baseline)
+            2. 计算相似度来匹配，Typical similarity measures: Normalized Cross-Correlation (NCC) , Sum of Squared Differences (SSD), Sum of Absolute Differences (SAD)
+        * 得到像素的匹配之后可以获得视差图：同一个场景在两个相机下成像的像素的位置偏差，因为通常下两个双目相机是水平放置的，所以该位置偏差一般体现在水平方向
+    * 对双目成像来说，视差图和深度图在某种程度上是等价的，知道了两个相机的相关参数，是可以将视差图转换为深度图的（最近有工作直接用AI输出深度图）
+    * 双目间距的影响：太小则深度误差大看不远，太大则看不近
+* Structure from motion (SFM)
+    * Simultaneously estimate both 3D geometry (structure) and camera pose (motion): solve via non-linear minimization of the reprojection errors
+
+### 光流（Lucas–Kanade）
+* 根据相邻两帧图像估计运动信息
+* 三个假设
+    * 光强（像素值）不变： $I(x,y,t)=I(x+dx,y+dy,t+dt)$
+    * 时间差较小： $dt=0$
+    * 空间相关性，空间不变形
+* 步骤图如下
+
+![](/post/note/mobileRobot/opticalflow1.png)
+![光流法](/post/note/mobileRobot/opticalflow2.png)
+
+### 点检测
+* Harris Corner & Shi-Tomasi（可判断是edge类型还是corner）
+    * 同平面旋转不变性，线性光照强度变化不变性；但对于尺度和仿射变换没有不变性
+    * corner的一个特性：Shifting a window in any direction should give a large change of intensity in at least 2 directions
+    ![](/post/note/mobileRobot/corner1.png)
+    ![角落检测一般分析思路](/post/note/mobileRobot/corner2.png)
+    * 特征值的解法 $det(A-\lambda I)=0$
+    ![Eigen Visualization](/post/note/mobileRobot/corner3.png)
+    ![Shi-Tomasi](/post/note/mobileRobot/corner4.png)
+    ![Harris实际上也可以采用单阈值筛选](/post/note/mobileRobot/corner5.png)
+* 解决特征检测的尺度变换问题
+    * Scale detector
+        * 思想是根据不同的图片尺度选择不同大小的检测区域大小/shifting region大小
+        * Sharp, local intensity changes in an image, are good regions to monitor for identifying relative scale in usual images
+            * Use DOG and LOG
+            * convolve image with kernel to identify sharp intensity discontinuities
+    * SIFT = Scale Invariant Feature Transform: an approach for detecting and describing regions of interest in an image
+        * invariant to changes in: rotation, scaling, illumination
+        * Very powerful in capturing + describing distinctive structure, but also computationally demanding
+* 一些快速算法
+    * FAST corner detector
+    * BRIEF descriptor，Not scale/rotation invariant (extensions exist...)
+    * BRISK （快，仅次于BRIEF，但旋转和尺度不变）
+
+### 线检测
+* 算法比较
+    * Split-and-merge and Line-Regression: fastest
+        * best applied on laser scans
+        * Deterministic & make use of the sequential ordering of raw scan points
+    * If applied on randomly captured points only last 3 algorithms would segment all lines
+
+![一图对比](/post/note/mobileRobot/lines.png)
+
+* Hough没什么好说的，参考DIP
+* Split-and-merge
+
+    ![](/post/note/mobileRobot/split1.png)
+    ![Split-and-merge](/post/note/mobileRobot/split2.png) 
+    ![full process](/post/note/mobileRobot/full.png) 
+
+* Linear regression
+
+    ![line regression](/post/note/mobileRobot/iterReg.png) 
+
+* RANSAC: RANdom SAmple Consensus.
+    * A generic & robust fitting algorithm of models in the presence of outliers (i.e. points which do not satisfy a model)
+    * Typical applications in robotics are: line extraction from 2D range data, plane extraction from 3D data, feature matching, structure from motion, camera calibration, homography estimation, etc.
+    * iterative and non-deterministic, the probability to find a set free of outliers increases as more iterations are used
+    * a non-deterministic method, results are different between runs
+
+### 地方检测
+* 地方的图像抽象为bag of words：We can describe a scene as a collection of words and look up in the database for images with a similar collection of words
+* 图像各种feature通过某种方法得到descriptor space里面的一个个点，用k聚类算法归类
+    * k-means
+        1. 先定义总共有多少个类/族 (cluster)
+        2. 将每个族心 (cluster centers）随机定在一个点上
+        3. 将每个数据点关联到最近族中心所属的筷上
+        4. 对于每一个筷找到其所有关联点的中心点（取每一个点坐标的平均值)
+        5. 将上述点变为新的筷心
+        6. 不停重复，直到每个族所拥有的点不变
+* 根据聚类生成一个单词树，树的最末端代表word，上一级代表一个聚类，拿去跟训练好的模型进行比较即可知道是什么单词
+
+---
+## 移动机器人的定位
+
+### 相关概念
+* Perception : the robot must interpret its sensors to extract meaningful data;
+* Localization : the robot must determine its position in the environment;
+* Cognition : the robot must decide how to act to achieve its goals;
+* Motion control : the robot must modulate its motor outputs to achieve the desired trajectory.
+
+### 挑战
+* noise: illumination, jitter, gain, bloom, blur
+* sensor aliasing (混叠)
+* odometry
+    * Limited resolution during integration (time increments, measurement resolution, etc.);
+    * Misalignment of the wheels (deterministic);
+    * Uncertainty in the wheel diameter and in particular unequal wheel diameter (deterministic);
+    * Variation in the contact point of the wheel;
+    * Unequal floor contact (slipping, nonplanar surface, etc.)
+    * error types
+        1. Range error: 积分 integrated path length (distance) of the robot’s movement, sum of the wheel movements
+        2. Turn error: 运动学参数 similar to range error, but for turns, difference of the wheel motions
+        3. Drift error: 打滑 difference in the error of the wheels leads to an error in the robot’s angular orientation
+
+### 差速模型里程计误差
+* 基于RK2的运动学模型
+
+![运动学模型](/post/note/mobileRobot/rk2.png) 
+
+* 误差传导模型结论
+
+![新的协方差矩阵](/post/note/mobileRobot/errprop.png) 
+![可视化](/post/note/mobileRobot/errpropv.png) 
+
+### 马尔可夫定位
+* Markov localization tracks the robot’s belief state using an arbitrary probability density function to represent the robot’s position
+
+![markov流程](/post/note/mobileRobot/markov.png) 
+
+* 对于2D定位，需要实时更新一个立方体的数据，很慢
+    * One possible solution would be to increase the cell size at the expense of localization accuracy.
+    * Another solution is to use an adaptive cell decomposition instead of a fixed cell decomposition.
+    * reduce the number of states that are updated in each step
+
+### 卡尔曼滤波定位
+* 卡尔曼滤波是迭代的，线性系统高斯噪声下最优的，实时性好
+
+![kalman流程](/post/note/mobileRobot/kalman1.png) 
+
+![kalman update](/post/note/mobileRobot/kalman2.png) 
+
+* 卡尔曼滤波器和信息融合
+
+    ![kalman fusion](/post/note/mobileRobot/fuse.png) 
