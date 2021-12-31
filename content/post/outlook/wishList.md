@@ -3,7 +3,7 @@ title: "愿望清单"
 date: 2020-01-01T15:45:12+08:00
 draft: false
 description: My wish list in John Goddard's style & future plan
-image: /post/blog/outlook/wishListCover.jpg
+image: /post/outlook/wishListCover.jpg
 comments: false
 license: false
 hidden: false

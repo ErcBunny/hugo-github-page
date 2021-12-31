@@ -53,7 +53,7 @@ menu:
 * (09/2015 ~ 06/2018)
 * In D14 during the first year
 * In E3 during the rest of the time
-* Ranked about 4000 in **Nationwide Unified Examination for Admissions to General Universities and Colleges**
+* Ranked about 4000 in **Nationwide Unified Examination for Admissions to General Universities and Colleges** (广东省赛区)
 
 ---
 ## AWARDS
@@ -63,7 +63,7 @@ menu:
 ### 2020
 * Second Prize, National ROBOMASTER Championship, Aug 2020
 * [First Prize, Student Innovation Project Assessment, Oct 2020](/p/a-3-rotor-vtol-uav/)
-* First Prize, National Undergraduate Electronics Design Contest, Nov 2020
+* [First Prize, National Undergraduate Electronics Design Contest, Nov 2020](https://www.bilibili.com/video/BV1Zv4y1o7aJ)
 * Second Prize RMB4000, HITSZ Outstanding Student Scholarship, Dec 2020
 * Third Prize, National Mathematical Contest in Modeling, Dec 2020
 ### 2019
@@ -73,7 +73,7 @@ menu:
 ### 2018
 * Second Prize, HITSZ Hackathon Event, Dec 2018
 
-> [Certificates in Chronological Order](https://1drv.ms/b/s!AtUoQjeuHMpig74s74hvZU29JQ9rXQ?e=F2Xzlf)
+> [Certificates in Chronological Order (PDF)](https://1drv.ms/b/s!AtUoQjeuHMpig74s74hvZU29JQ9rXQ?e=F2Xzlf)
 
 ---
 ## SKILLS

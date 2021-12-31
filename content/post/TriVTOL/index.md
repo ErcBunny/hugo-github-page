@@ -3,7 +3,7 @@ title: "A 3-Rotor VTOL UAV"
 date: 2019-08-15T13:20:21+08:00
 draft: false
 description: A project for The Freshman Year Innovation Program of HITSZ (2019)
-image: /post/finishedProject/TriVTOL/cover.png
+image: cover.png
 comments: true
 license: false
 hidden: false
@@ -29,11 +29,11 @@ tags:
 
 * We only implemented attitude control. Communication between boards is via PWM
 
-![Illustration of the UAV | ①: Aileron, ②: Rudder & Elevator, ③ & ④: Tilt Servo, ⑤: Motor](/post/finishedProject/TriVTOL/illustration.png)
+![Illustration of the UAV | ①: Aileron, ②: Rudder & Elevator, ③ & ④: Tilt Servo, ⑤: Motor](illustration.png)
 
-![System Block Diagram](/post/finishedProject/TriVTOL/overview.png)
+![System Block Diagram](overview.png)
 
-![Essential Part of the F1 Mixing Unit Explained](/post/finishedProject/TriVTOL/math.png)
+![Essential Part of the F1 Mixing Unit Explained](math.png)
 
 ---
 ## DETAILED REPORT

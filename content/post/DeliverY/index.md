@@ -3,7 +3,7 @@ title: "Autonomous Delivery Drone"
 date: 2021-04-23T14:55:42+08:00
 draft: false
 description: National Undergraduate Engineering Training Integration Ability Competition (2021)
-image: /post/finishedProject/DeliverY/cover.png
+image: cover.png
 comments: true
 license: false
 hidden: false

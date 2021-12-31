@@ -3,7 +3,7 @@ title: "HLJenga: Hexalink Jenga Manipulator"
 date: 2021-07-01T15:24:52+08:00
 draft: false
 description: A Hexalink Manipulator Plays Jenga, Coursework (2021)
-image: /post/finishedProject/HLJenga/cover.png
+image: cover.png
 comments: true
 license: false
 hidden: false
@@ -42,7 +42,7 @@ tags:
 
 ### Solving the AX=XB Problem
 
-![HE Calibration Illustrated](/post/finishedProject/HLJenga/HECProcess.png)
+![HE Calibration Illustrated](HECProcess.png)
 
 * Consider the transformation $T_{E_1 \rightarrow C_0}=g_{1_1}^{-1}g_{1_0}g_2=g_2g_{3_1}g_{3_0}^{-1}$, where $g$ stands for the configuration of a frame
 * By taking N pictures, we can make use of N equations to solve $AX=XB$
@@ -53,7 +53,7 @@ tags:
 * Subproblem 2: How to find $g_{1_i }$?
   * Forward kinematics
 
-![Solving Subproblem 1](/post/finishedProject/HLJenga/subp1.png)
+![Solving Subproblem 1](subp1.png)
 
 ---
 ## JENGA DETECTION
@@ -80,7 +80,7 @@ Apply inverse kinematics with given starting, ending and via points to find corr
 
 * To avoid collision and damage, trajectories are first visualized in MATLAB
 
-![Trajectory Visualized](/post/finishedProject/HLJenga/traj.png)
+![Trajectory Visualized](traj.png)
 
 ---
 ## RELATED LINKS

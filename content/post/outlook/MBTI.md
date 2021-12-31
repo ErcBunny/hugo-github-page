@@ -3,7 +3,7 @@ title: "基于MBTI的职业生涯规划"
 date: 2019-03-27T11:07:12+08:00
 draft: false
 description: 学院要求每个学生做一个MBTI测试，并基于此做一个职业生涯规划
-image: /post/blog/outlook/MBTICover.png
+image: /post/outlook/MBTICover.png
 comments: false
 license: false
 hidden: false

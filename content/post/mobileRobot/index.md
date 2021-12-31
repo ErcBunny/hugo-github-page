@@ -1,9 +1,9 @@
 ---
 title: "Notes for Introduction to Autonomous Mobile Robots"
-date: 2021-12-27T15:24:52+08:00
+date: 2021-12-29T15:24:52+08:00
 draft: false
 description: A Fall 2021 Course 「移动机器人导论」
-image: /post/note/mobileRobot/cover.jpg
+image: cover.jpg
 comments: true
 license: false
 hidden: false
@@ -13,6 +13,23 @@ tags:
 ---
 
 > 篇幅较长，请先浏览目录，方便导航哦～
+
+---
+## 2021年12.31考试内容
+* 机器人的自由度计算
+* 轮子的自由度
+* sobel算子作用
+* 直线检测各种算法原理
+* 搜索算法哪个完备
+* 概率框架下的定位模型
+* 什么噪声没办法去除
+* dijkstra
+* markov定位图
+* split merge
+* 势场法导航
+* 卡尔曼滤波的k矩阵
+* 单轮驱动的运动模型，自由度
+* odom模型和误差传播
 
 ---
 ## 绪论
@@ -42,7 +59,7 @@ tags:
     * think (planning/understanding): localizatoon, mapping, planning
     * act (motion control): tracking, actuator driving
 
-![general pipeline](/post/note/mobileRobot/see-think-act.png)
+![general pipeline](see-think-act.png)
 
 ---
 ## 运动形式
@@ -97,7 +114,7 @@ tags:
 * config矩阵可以是 $3 \times 3$ ：因为只有两个维度
 * $\bold{\dot{\xi_I}=R(\theta)\dot{\xi_R}}$ ，两个坐标系下的速度之间关系为旋转矩阵
 
-![坐标系的一般设置](/post/note/mobileRobot/coord.png)
+![坐标系的一般设置](coord.png)
 
 ### (前向)运动学模型
 * 指建立惯性系下参考点速度和执行器速度之间的关系
@@ -125,7 +142,7 @@ tags:
 * 轮式移动机器人运动学建模仅考虑平面运动，因此其对应的输出状态为三维向量，因此，最多有三个独立约束
 * 动力学建模在运动变化较为快速、动态响应比较明显的情况下适用，比如无人机上
 
-![运动学模型例子](/post/note/mobileRobot/kine-example.png)
+![运动学模型例子](kine-example.png)
 
 ### 自由度
 * 自由度是机动性的度量
@@ -144,7 +161,7 @@ tags:
 * 机器人的完整性判据：可移动度等于工作空间维度
     * 对于地面移动机器人，工作空间维度是3
 
-![自由度计算例子](/post/note/mobileRobot/dof-example.png)
+![自由度计算例子](dof-example.png)
 
 ---
 ## 二轮差速机器人的控制
@@ -172,7 +189,7 @@ tags:
 
 ### 定点控制
 
-![机器人模型](/post/note/mobileRobot/robot2ctrl.png)
+![机器人模型](robot2ctrl.png)
 
 * 记号和问题描述
     * $q=[x,y,\theta]^T$ 为世界坐标系下的状态
@@ -198,9 +215,11 @@ tags:
     * 带入到误差模型里后还是存在三角非线性，因为 $\alpha$ 始终比较小，可以做三角函数的线性化得 $\dot{\tilde{q}} = \bold{A_{linear}} \tilde{q}$
     * 由Hurwitz判据知系统指数收敛，又近似了LTI，所以渐进收敛
 
-![误差模型的推导](/post/note/mobileRobot/pole1.png)
-![控制器和线性化](/post/note/mobileRobot/pole2.png)
-![稳定性分析](/post/note/mobileRobot/pole3.png)
+![误差模型的推导](pole1.png)
+
+![控制器和线性化](pole2.png)
+
+![稳定性分析](pole3.png)
 
 > 并不是说极坐标一定要线性化，也可以指定 $v,\omega$ 为其他的函数，非线性的也可以，只不过就得用Lyapnuov理论了
 >
@@ -242,7 +261,7 @@ tags:
         * 估计值 $>$ 实际代价：不能保证找到最短路径，不过此时会很快，若远大于则变为最佳优先搜索
     * 在低维度空间里很常用，限制是需要构造一个图，启发函数比较难找，比较难栅格化
 
-![Dijkstra和A*区别](/post/note/mobileRobot/Dijk-Astar.png)
+![Dijkstra和A*区别](Dijk-Astar.png)
 
 * D*: Dynamic A*
     * 动态环境下可能各种条件代价会变化所以进行了改进
@@ -256,7 +275,7 @@ tags:
     4. 检查是否到达目标（附近）
     5. loop
 
-![范数](/post/note/mobileRobot/norm.png)
+![范数](norm.png)
 
 * Probabilistic Roadmaps (PRM, 1996)
     * 特性
@@ -291,18 +310,19 @@ tags:
 * 主要思想：避免层级结构，同时考虑全局和局部路径，建立一个全局势能场，机器人自动沿着最大梯度方向下降到目标点
 * 一种常见的实现：总场=目标场+障碍场
 
-![目标场](/post/note/mobileRobot/goal.png)
+![目标场](goal.png)
 
-![障碍场](/post/note/mobileRobot/obs.png)
+![障碍场](obs.png)
 
-![总势场](/post/note/mobileRobot/total.png)
+![总势场](total.png)
 
 ---
 ## 传感器大类和指标
 
 ### 分类
-![](/post/note/mobileRobot/sensor1.png)
-![常见传感器](/post/note/mobileRobot/sensor2.png)
+![](sensor1.png)
+
+![常见传感器](sensor2.png)
 
 ### 常见传感器的原理
 *  rangefinder
@@ -384,19 +404,27 @@ tags:
     * 空间相关性，空间不变形
 * 步骤图如下
 
-![](/post/note/mobileRobot/opticalflow1.png)
-![光流法](/post/note/mobileRobot/opticalflow2.png)
+![](opticalflow1.png)
+
+![光流法](opticalflow2.png)
 
 ### 点检测
 * Harris Corner & Shi-Tomasi（可判断是edge类型还是corner）
     * 同平面旋转不变性，线性光照强度变化不变性；但对于尺度和仿射变换没有不变性
     * corner的一个特性：Shifting a window in any direction should give a large change of intensity in at least 2 directions
-    ![](/post/note/mobileRobot/corner1.png)
-    ![角落检测一般分析思路](/post/note/mobileRobot/corner2.png)
+
+    ![](corner1.png)
+
+    ![角落检测一般分析思路](corner2.png)
+    
     * 特征值的解法 $det(A-\lambda I)=0$
-    ![Eigen Visualization](/post/note/mobileRobot/corner3.png)
-    ![Shi-Tomasi](/post/note/mobileRobot/corner4.png)
-    ![Harris实际上也可以采用单阈值筛选](/post/note/mobileRobot/corner5.png)
+
+    ![Eigen Visualization](corner3.png)
+
+    ![Shi-Tomasi](corner4.png)
+
+    ![Harris实际上也可以采用单阈值筛选](corner5.png)
+
 * 解决特征检测的尺度变换问题
     * Scale detector
         * 思想是根据不同的图片尺度选择不同大小的检测区域大小/shifting region大小
@@ -418,18 +446,19 @@ tags:
         * Deterministic & make use of the sequential ordering of raw scan points
     * If applied on randomly captured points only last 3 algorithms would segment all lines
 
-![一图对比](/post/note/mobileRobot/lines.png)
+![一图对比](lines.png)
 
 * Hough没什么好说的，参考DIP
 * Split-and-merge
 
-    ![](/post/note/mobileRobot/split1.png)
-    ![Split-and-merge](/post/note/mobileRobot/split2.png) 
-    ![full process](/post/note/mobileRobot/full.png) 
+    ![](split1.png)
+    ![](split2.png) 
+
+    ![full process](full.png) 
 
 * Linear regression
 
-    ![line regression](/post/note/mobileRobot/iterReg.png) 
+    ![line regression](iterReg.png) 
 
 * RANSAC: RANdom SAmple Consensus.
     * A generic & robust fitting algorithm of models in the presence of outliers (i.e. points which do not satisfy a model)
@@ -441,12 +470,12 @@ tags:
 * 地方的图像抽象为bag of words：We can describe a scene as a collection of words and look up in the database for images with a similar collection of words
 * 图像各种feature通过某种方法得到descriptor space里面的一个个点，用k聚类算法归类
     * k-means
-        1. 先定义总共有多少个类/族 (cluster)
-        2. 将每个族心 (cluster centers）随机定在一个点上
-        3. 将每个数据点关联到最近族中心所属的筷上
-        4. 对于每一个筷找到其所有关联点的中心点（取每一个点坐标的平均值)
-        5. 将上述点变为新的筷心
-        6. 不停重复，直到每个族所拥有的点不变
+        1. 先定义总共有多少个类/蔟 (cluster)
+        2. 将每个蔟心 (cluster centers）随机定在一个点上
+        3. 将每个数据点关联到最近蔟中心所属的蔟上
+        4. 对于每一个蔟找到其所有关联点的中心点（取每一个点坐标的平均值)
+        5. 将上述点变为新的蔟心
+        6. 不停重复，直到每个蔟所拥有的点不变
 * 根据聚类生成一个单词树，树的最末端代表word，上一级代表一个聚类，拿去跟训练好的模型进行比较即可知道是什么单词
 
 ---
@@ -475,17 +504,18 @@ tags:
 ### 差速模型里程计误差
 * 基于RK2的运动学模型
 
-![运动学模型](/post/note/mobileRobot/rk2.png) 
+![运动学模型](rk2.png) 
 
 * 误差传导模型结论
 
-![新的协方差矩阵](/post/note/mobileRobot/errprop.png) 
-![可视化](/post/note/mobileRobot/errpropv.png) 
+![新的协方差矩阵](errprop.png) 
+
+![可视化](errpropv.png) 
 
 ### 马尔可夫定位
 * Markov localization tracks the robot’s belief state using an arbitrary probability density function to represent the robot’s position
 
-![markov流程](/post/note/mobileRobot/markov.png) 
+![markov流程](markov.png) 
 
 * 对于2D定位，需要实时更新一个立方体的数据，很慢
     * One possible solution would be to increase the cell size at the expense of localization accuracy.
@@ -495,10 +525,10 @@ tags:
 ### 卡尔曼滤波定位
 * 卡尔曼滤波是迭代的，线性系统高斯噪声下最优的，实时性好
 
-![kalman流程](/post/note/mobileRobot/kalman1.png) 
+![kalman流程](kalman1.png) 
 
-![kalman update](/post/note/mobileRobot/kalman2.png) 
+![kalman update](kalman2.png) 
 
 * 卡尔曼滤波器和信息融合
 
-    ![kalman fusion](/post/note/mobileRobot/fuse.png) 
+    ![kalman fusion](fuse.png) 

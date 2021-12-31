@@ -3,7 +3,7 @@ title: "Dash To Cones"
 date: 2021-11-13T16:37:33+08:00
 draft: false
 description: Robot Navigation on Color & Perspective, Digital Image Processing Coursework (2021)
-image: /post/finishedProject/DashToCones/cover.png
+image: cover.png
 comments: true
 license: false
 hidden: false

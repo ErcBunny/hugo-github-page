@@ -3,7 +3,7 @@ title: "pyTimelapse"
 date: 2021-01-22T16:37:33+08:00
 draft: false
 description: An Extra Long & Highly Customizable Time-lapse Framework Based on ADB and Python
-image: /post/ongoingProject/timelapse/cover.jpg
+image: cover.jpg
 comments: true
 license: false
 hidden: false

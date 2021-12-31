@@ -3,7 +3,7 @@ title: "大二学年总结"
 date: 2020-06-01T18:52:23+08:00
 draft: false
 comments: true
-image: /post/blog/lifeSummary/grade2.png
+image: /post/lifeSummary/grade2.png
 license: false
 hidden: false
 categories:

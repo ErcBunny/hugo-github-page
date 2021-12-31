@@ -15,7 +15,7 @@ menu:
             icon: flag
 ---
 
-> [**My Live Schedule**: scroll down to the bottom for recent updates (depend on onedrive service)](https://1drv.ms/b/s!AtUoQjeuHMpig74BT-WKhKnwRrszmA?e=ooMkLr)
+> [**My Live Schedule**: scroll down to the bottom for recent updates (depend on onedrive service)](https://1drv.ms/b/s!AtUoQjeuHMpig740Vy5pLSMFnSgjmg?e=bNr23y)
 
 ---
 ## BACHELOR THESIS
@@ -36,7 +36,3 @@ menu:
 
 * Deadlines are approaching... Working hard on it.
 
----
-## PREPARE FOR THE FINAL EXAM
-
-* [**Introduction to auto mobile robots**](/p/notes-for-introduction-to-autonomous-mobile-robots/)... The final exam is scheduled on Dec.31

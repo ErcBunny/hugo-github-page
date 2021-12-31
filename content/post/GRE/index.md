@@ -3,7 +3,7 @@ title: "さよなら〜GRE"
 date: 2021-12-12T21:40:00+08:00
 draft: false
 description: 今天终于GRE毕业了，进行了一个放的解
-image: /post/blog/GRE/cover.png
+image: cover.png
 comments: true
 license: false
 hidden: false

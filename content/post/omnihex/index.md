@@ -3,7 +3,7 @@ title: "OmniHEX"
 date: 2021-09-01T16:37:33+08:00
 draft: false
 description: Adaptive Nonlinear Model Predictive Control for An Overactuated Hexacopter
-image: /post/ongoingProject/omnihex/cover.png
+image: cover.png
 comments: true
 license: false
 hidden: false
