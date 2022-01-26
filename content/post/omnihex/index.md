@@ -16,11 +16,6 @@ tags:
 ---
 
 ---
-## INFO
-
-> This page is WIP, as translating the original version of my research proposal is no easier than rewriting one in English. I also need to re-render charts and graphs with Chinese characters, which requires quite a lot of effort. Please expect this page to be complete by Feb 2022. Best regards~
-
----
 ## LINKS
 
 * [Presentation of Previous Work (English)](https://github.com/ErcBunny/sharedDocs/raw/main/Project%20Experience.pptx)
@@ -32,13 +27,20 @@ tags:
 
 # omniHex
 
-![fooimg](https://ercbunny.github.io/p/omnihex/cover_huf54f83ec7f48f4593ffcb0ac862986d3_1368328_1600x0_resize_box_3.png)
+![](https://ercbunny.github.io/p/omnihex/cover_huf54f83ec7f48f4593ffcb0ac862986d3_1368328_1600x0_resize_box_3.png)
 
-[toc]
+## Dev Milestones
+
+1. [Dec 01 2021] Upgrade to ROS2: 100%
+2. [Dec 15 2021] PID and Newton-Euler Dynamics in SITL: 100%
+3. [Dec 31 2021] Real hardware drivers and maiden flight: 90%
+4. [Mar 01 2022] Adaptive MPC real flight: 0%
+5. [Apr 01 2022] Track trajectories and collect data: 0%
+6. [May 01 2022] Thesis writing: 0%
 
 ## Environment Setup
 
-1. `Ubuntu 20.04 LTS` with `ROS2 foxy` configuration is recommended.
+1. `Ubuntu 20.04 LTS` with `ROS2 foxy` and `ROS1 noetic` (since vrpn-client-ros is only available for ROS1).
 2. Install ROS2 [via debian](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html) and [additional tools](https://docs.px4.io/master/en/ros/ros2_comm.html#install-ros-2).
 3. Install Fast-RTPS-Gen using source code.
    * Install [Gradle v6.3](https://gradle.org/install/) through [sdkman](https://sdkman.io/).
@@ -54,14 +56,19 @@ git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git -b v1.0.4 ~/F
 4. Install dependencies for PX4: `PX4-Autopilot/Tools/setup/ubuntu.sh`.
 5. Install officially provided ROS2 plug-ins for Gazebo: `sudo apt install ros-foxy-gazebo-ros-pkgs`.
 6. Install [QgroundControl](http://qgroundcontrol.com/) ground station.
+7. Install packages for optitrack: `sudo apt install ros-foxy-ros1-bridge ros-noetic-vrpn ros-noetic-vrpn-client-ros`
+   * `vrpn-client-ros` publishes the built in message type `geometry-msgs`, it is OK to use debian release of `ros1-bridge`.
+   * Building `ros1-bridge` form source enables extra support for custom message and service types but has conflicts with `ros-foxy-controller-manager-msgs`.
+8. Install mavros for data visualization: `sudo apt install ros-noetic-mavros* ros-noetic-mavlink`.
 
 ## Usage
 
 ### Simulation with Gazebo
 
-1. Build ROS2 workspace and source this workspace.
+1. Build ROS2 workspace.
 
 ```
+source /opt/ros/foxy/setup.bash
 cd scripts
 ./build_all_ros_clean.sh
 ```
@@ -69,6 +76,8 @@ cd scripts
 2. Build and run PX4 SITL simulation. It is required to source ROS2 setup file.
 
 ```
+source /opt/ros/foxy/setup.bash
+source ./ros2-workspace/install/setup.bash
 cd PX4-Autopilot
 PX4_NO_FOLLOW_MODE=1 px4_sitl_ctrlalloc gazebo_omni_hex
 ```
@@ -76,6 +85,8 @@ PX4_NO_FOLLOW_MODE=1 px4_sitl_ctrlalloc gazebo_omni_hex
 3. Run `micrortps_agent` over UDP.
 
 ```
+source /opt/ros/foxy/setup.bash
+source ./ros2-workspace/install/setup.bash
 micrortps_agent -t UDP
 ```
 
@@ -86,12 +97,62 @@ micrortps_agent -t UDP
 5. Or use the offboard control node to generate a trajectory for omniHex to track.
 
 ```
+source /opt/ros/foxy/setup.bash
+source ./ros2-workspace/install/setup.bash
 ros2 run px4_ros_com offboard_control
 ```
 
 ### Real World Flight
 
-> TODO: servo driver, VRPN client, real flight
+* Port connections on NUC:
+   * dynamixel servos on `/dev/ttyUSB0 @ 115200`
+   * urtps_bridge on `/dev/ttyUSB1 @ 3000000` -> MCU `TELEM1`
+   * QGC/mavlink on `/dev/ttyACM0 @ any baud` (`ACM1` occurs after a reboot) -> MCU `microUSB`
+
+* About RC:
+  * switch A is the kill switch
+  * switch F sets different flight modes (up: altitude, mid: position, down: acro).
+
+1. Setup the motion capture system.
+   1. Open motive software and open the most recent project (Z-up configuration).
+   2. Go to capture layout (upper-right corner) and delete default rigid bodies.
+   3. Aligned markers with the world frame and create a new rigid body from the selected ones, rename this new instance to `uav` (as it is fixed in `ros1-workspace/src/vrpn_client/launch/default.launch`). Data is automatically published to local network.
+2. Build PX4 firmware.
+
+```
+source /opt/ros/foxy/setup.bash
+cd PX4-Autopilot
+make cubepilot_cubeorange_ctrlalloc
+```
+
+2. Upload firmware to MCU.
+   1. Open QGC and navigate to "Vehicle Setup-Firmware".
+   2. Plug in MCU through USB (ttyACM) port and QGC will auto detect the MCU. This step requires the MCU only powered by USB.
+   3. Select custom firmware and upload `PX4-Autopilot/build/cubepilot_cubeorange_ctrlalloc/cubepilot_cubeorange_ctrlalloc.px4`.
+   4. Restart QGC so that airframe files could be loaded by QGC, then you can do further settings and calibration.
+3. Build ROS1 workspace.
+
+```
+source /opt/ros/noetic/setup.bash
+cd ros1-workspace
+catkin build
+```
+
+4. Build ROS2 workspace.
+
+```
+source /opt/ros/foxy/setup.bash
+cd scripts
+./build_all_ros_clean.sh
+```
+
+5. Start packages on NUC: `setup_real_flight.sh`. This script starts the following necessary drivers.
+   * ROS1 `vrpn_client`
+   * ROS2 `ros1_bridge`
+   * ROS2  `micrortps_bridge`, `dyanmixel_driver`, `optitrack`
+6. Now you can use packages like rqt or rviz for data monitor and visualization. Make sure to source the corresponding ROS version and workspace.
+
+> TODO: maiden flight test
 
 ## Software Version
 
@@ -126,6 +187,16 @@ ros2 run px4_ros_com offboard_control
    - Use numbers in "Moments of inertia, taken at the center of mass and aligned with the output coordinate system". Numbers that are not on the diagonal line of the matrix should be inverted.
 7. `sitl_gazebo` plug-ins: "IMU" should be loaded after "mavlink interface".
 
+## ROS1 Packages
+
+### mavros_client
+
+* An overlay package for customizing the launch file. Note that this package should not be named `mavros`, otherwise ROS may not find the right package path.
+
+### vrpn_client
+
+* An overlay package for customizing the launch file.
+
 ## ROS2 Packages
 
 ### custom_gazebo_plugins
@@ -148,6 +219,17 @@ ros2 run px4_ros_com offboard_control
    * Previously, `build_ros2_workspace.bash` is set to skip `custom_gazebo_plugins` because the latter depend on `px4_msgs`.
    * It is better to add `<depend>px4_msg</depend>` in `package.xml`. In this way we don't need to specify a order. Make sure to add `find_package(px4_msgs REQUIRED)` and `ament_target_dependencies(foo ...px4_msgs...)` in `CMakeLists.txt`.
 
+### optitrack_driver
+
+1. `visual_odom_publisher` receives pose data from MOCAP, performs frame transformation and publishes data to topic `VehicleVisualOdometry_PubSubTopic`. In this target, the message is published in a timer callback at 50Hz.
+2. Timestamps are taken from `VehicleImu_PubSubTopic`. 
+3. `callback_relay` is a simple relay. It is similar to `visual_odom_publisher` but instead of publishing data in a timer callback, it publishes data in the callback for receiving pose data.
+
+### dynamixel_driver
+
+1. `read_write_node` is the example node provided by `dynamixel_sdk`.
+2. `arm_position_control` is the one used for controlling the arm positions. It communicates with dynamixel servos via UART in the callback function for receiving `ArmRotation_PubSubTopic`.
+
 ## PX4 Tools and Miscellaneous
 
 1. Set the correct URL in `.gitmodules`.
@@ -157,6 +239,7 @@ ros2 run px4_ros_com offboard_control
 3. As we are using the `micrortps_bridge`, we need to build this module in PX4. We can specify this feature by uncommenting the `micrortps_bridge` line in `PX4-Autopilot/boards/px4/sitl/ctrlalloc.cmake`, which is the module configuration file for SITL targets. We can choose what modules to be built and what not to be built. The same rule applies to `.cmake` files for other boards.
 4. Add our custom model for gazebo simulation in `PX4-Autopilot/platforms/posix/cmake/sitl_target.cmake`.
 5. Add our airframe file (a model-dependent script for loading parameters and modules) for simulation in `PX4-Autopilot/ROMFS/init.d-posix/airframes` and make sure to add this file to the `CMakeLists.txt`.
+5. The airframe for real hardware is `init.d/airframes/6004_omni_hex`.
 
 ## PX4 Messages
 
@@ -175,13 +258,9 @@ ros2 run px4_ros_com offboard_control
 
 2. Read center of mass parameters and call `AngularVelocityControl::update()` with additional arguments in`AngularVelocityController.cpp/hpp`.
 
-3. Newton-Euler equation cross term $\omega_b \cross v_b$​ in `void AngularVelocityController::Run()`.
-
-   > TODO: implement Newton-Euler equation correctly
+3. Newton-Euler equation cross term $\omega_b \cross v_b$ in `void AngularVelocityController::Run()`.
 
 4. Center of mass parameters are defined in `vehicle_model_params.c`.
-
-
 
 ### commander
 
@@ -199,7 +278,7 @@ ros2 run px4_ros_com offboard_control
 
 2. Switch to `FlightTaskIndex::ManualAcceleration` when in `vehicle_status_s::NAVIGATION_STATE_ACRO`. This feature is implemented in `FlightModeManager.cpp`.
 
-   > TODO: exclusive flight task for ACRO mode (not only pitch but full pose)
+> TODO: exclusive flight task for ACRO mode (not only pitch but full pose)
 
 3. `FlightTask.cpp/hpp`: add missing variables and functions that are not implemented for roll and pitch commands.
 
