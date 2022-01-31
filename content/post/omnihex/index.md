@@ -27,7 +27,7 @@ tags:
 
 # omniHex
 
-![](https://ercbunny.github.io/p/omnihex/cover_huf54f83ec7f48f4593ffcb0ac862986d3_1368328_1600x0_resize_box_3.png)
+![demo](https://raw.githubusercontent.com/ErcBunny/omniHex/master/demo.png?token=GHSAT0AAAAAABQ2WM4EBBD3ZICVRH3ICXKAYPYBZPQ)
 
 ## Dev Milestones
 
@@ -102,6 +102,8 @@ source ./ros2-workspace/install/setup.bash
 ros2 run px4_ros_com offboard_control
 ```
 
+> Above mentioned steps are implemented in `run_simulation.sh`, run this script, take off to `{0, 0, 2.5}` and run `offboard.sh` to track the 8-shape trajectory.
+
 ### Real World Flight
 
 * Port connections on NUC:
@@ -170,6 +172,8 @@ cd scripts
 3. Gazebo
    - N-Green-y, E-Red-x, U-Blue-z (world) 
 4. Arm rotation: see [Control Allocation of a Tilting Rotor Hexacopter](https://doi.org/10.3929/ethz-b-000224598)
+4. In SITL, PX4 NED x is aligned with Gazebo y
+4. In lab setting, PX4 FRD is algined with optitrack x
 
 ## SW Model to SDF
 
@@ -214,7 +218,14 @@ cd scripts
 ### px4_ros_com
 
 1. The main purpose of this package is to generate the communication bridge `micrortps_agent` from a template file `src/templates/uorb_rtps_message_ids.yaml`. The template file should be synced with PX4 via script `PX4-Autopilot/msg/tools/uorb_to_ros_rtps_ids.yaml`.
+
 2. There is also an example of off-board control available in `src/examples/offboard`. This example code is modified to generate a full position-pose trajectory as the function of timestamps.
+
+   1. circle
+   2. 8-shape
+
+   > TODO: use input args or launch file to specify trajectory shape
+
 3. It also provides useful scripts for cleaning and building the workspace.
    * Previously, `build_ros2_workspace.bash` is set to skip `custom_gazebo_plugins` because the latter depend on `px4_msgs`.
    * It is better to add `<depend>px4_msg</depend>` in `package.xml`. In this way we don't need to specify a order. Make sure to add `find_package(px4_msgs REQUIRED)` and `ament_target_dependencies(foo ...px4_msgs...)` in `CMakeLists.txt`.
@@ -229,6 +240,11 @@ cd scripts
 
 1. `read_write_node` is the example node provided by `dynamixel_sdk`.
 2. `arm_position_control` is the one used for controlling the arm positions. It communicates with dynamixel servos via UART in the callback function for receiving `ArmRotation_PubSubTopic`.
+
+### trajectory_generator
+
+1. A package for generating trajectories in MPC framework and visualizing `TrajectorySetpoint_PubSubTopic`.
+2. Visualization is implemented in `rviz_translator.cpp`
 
 ## PX4 Tools and Miscellaneous
 
@@ -278,7 +294,7 @@ cd scripts
 
 2. Switch to `FlightTaskIndex::ManualAcceleration` when in `vehicle_status_s::NAVIGATION_STATE_ACRO`. This feature is implemented in `FlightModeManager.cpp`.
 
-> TODO: exclusive flight task for ACRO mode (not only pitch but full pose)
+   > TODO: exclusive flight task for ACRO mode (not only pitch but full pose)
 
 3. `FlightTask.cpp/hpp`: add missing variables and functions that are not implemented for roll and pitch commands.
 
@@ -300,6 +316,10 @@ cd scripts
 2. `mc_pos_control_params.c`: define parameters for manual roll and pitch rate control, which are used in `FlightTaskManualAltitude.hpp`.
 3. `MulticopterPositionControl.cpp/hpp`: call modified functions and pass correct arguments.
 
+### EKF2
+
+1. In `PublishAttitude`, an extra step of converting and publishing RPY is added.
+
 ## Motor-Propeller Model
 
 ### SITL
@@ -307,3 +327,8 @@ cd scripts
 ### Real World Data
 
 > TODO: mapping between u, PWM, angular velocity, determine thrust and torque coefficient
+
+## Matlab Files
+
+1. In `matlab-workspace`.
+2. `trajectory.m`: visualization of 8-shape trajectory.
