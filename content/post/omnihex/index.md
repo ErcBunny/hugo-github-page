@@ -27,7 +27,7 @@ tags:
 
 # omniHex
 
-![demo](https://raw.githubusercontent.com/ErcBunny/omniHex/master/demo.png?token=GHSAT0AAAAAABQ2WM4EBBD3ZICVRH3ICXKAYPYBZPQ)
+![demo](demo.png)
 
 ## Dev Milestones
 

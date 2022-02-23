@@ -91,7 +91,7 @@ menu:
 * Mandarin: native
 * English: fluent
 * Cantoness: intermediate
-* Janpaness: beginer
+* Janpaness: beginner
 
 ---
 ## OTHERS
