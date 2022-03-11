@@ -23,18 +23,25 @@ tags:
 
 ---
 
-> Repository readme below
+## VIDEO DEMO
 
-# omniHex
+{{< bilibili BV12P4y1g7dH 1 >}}
 
-![demo](demo.png)
+---
 
 ## Dev Milestones
 
+![SITL](demo.png)
+
 1. [Dec 01 2021] Upgrade to ROS2: 100%
 2. [Dec 15 2021] PID and Newton-Euler Dynamics in SITL: 100%
-3. [Dec 31 2021] Real hardware drivers and maiden flight: 90%
-4. [Mar 01 2022] Adaptive MPC real flight: 0%
+3. [Dec 31 2021] Real hardware drivers and maiden flight: 100%
+4. [Mar 01 2022] Adaptive MPC real flight: 20%
+   * controller architecture and design: 100%
+   * formulate MPC solver using acados: 100%
+   * test MPC solver in Python: 5%
+   * MPC node: 5%
+   * L1 adaptive enhancement: 0%
 5. [Apr 01 2022] Track trajectories and collect data: 0%
 6. [May 01 2022] Thesis writing: 0%
 
@@ -154,8 +161,6 @@ cd scripts
    * ROS2  `micrortps_bridge`, `dyanmixel_driver`, `optitrack`
 6. Now you can use packages like rqt or rviz for data monitor and visualization. Make sure to source the corresponding ROS version and workspace.
 
-> TODO: maiden flight test
-
 ## Software Version
 
 1. The original version of `PX4` is `stable release v1.12.3`. Modified submodules derive from the commit that is referenced by PX4.
@@ -256,6 +261,8 @@ cd scripts
 4. Add our custom model for gazebo simulation in `PX4-Autopilot/platforms/posix/cmake/sitl_target.cmake`.
 5. Add our airframe file (a model-dependent script for loading parameters and modules) for simulation in `PX4-Autopilot/ROMFS/init.d-posix/airframes` and make sure to add this file to the `CMakeLists.txt`.
 5. The airframe for real hardware is `init.d/airframes/6004_omni_hex`.
+5. A new mixer is in use: `omnihex.main.mix`.
+5. `mc_rate_control` isn't started in `rc.mc_apps` if `MIXER = omnihex`
 
 ## PX4 Messages
 
@@ -286,6 +293,7 @@ cd scripts
 
 1. The allocation matrix (actuator effectiveness) is implemented as a subclass of `ControlAllocationPseudoInverse` and `ModuleParams`. See `ActuatorEffectivenessOmniHex.cpp/hpp/params.c` for more detail. In PX4 convention, torque comes above force in a wrench.
 2. Add omniHex to enum classes, switch cases, and includes in `ControlAllocator.cpp/hpp`.
+2. Publish control signals to `actuator_controls_0` instead of `actuator_controls_4`, with `actuator_controls_0[3]` reserved for total thrust signal.
 3. Always check `CMakeLists.txt`
 
 ### flight_mode_manager
@@ -320,13 +328,37 @@ cd scripts
 
 1. In `PublishAttitude`, an extra step of converting and publishing RPY is added.
 
+## mixer & px4io
+
+1. `AllocatedActuatorMixer.cpp` now listens to `actuator_controls_0` instead of `actuator_controls_4`.
+
+2. ESC calibration parts in `px4io.cpp` and `mixer_module.cpp` are modified for `control[0]` to `control[6]`, except `control[3]`.
+
+   > TODO: test calibration function, <u>***make sure props are removed***</u>
+
 ## Motor-Propeller Model
 
 ### SITL
 
+1. In `gazebo_motor_model` and `omni_hex.sdf`
+   * `motorConstant = thrustCoef = 8.5e-06`
+   * `torqueCoef = thrustCoef * momentConstant = 8.5e-06 * 0.06`
+2. In `px4`
+   * The thrust coefficient if defined as `Thrust = CT * u^2`, where u (with value between CA_ACT0_MIN and CA_ACT0_MAX) is the output signal sent to the motor controller. `CT = 19.125`
+   * The moment coefficient is defined as Torque = KM * Thrust (is consistent with momentConstant). `KM = 0.06`
+3. From u (PX4) to $\omega$(real rotor angular velocity)
+   * `PWM = 1000 * (1 + u)` (observation from print-debugging), where `u = actuator_setpoint[0, 1]`
+   * `omega = (u + offset) * scaling + idle` @(line ~1121 mavlink interface plugin), in sdf `offset = 0; scaling = 1500; idle = 100`
+4. Conversion between `CT`(PX4) and `motor constant` (thrust coef, paper, plugin), we assume that the idle value is negligable
+   * `CT = scaling^2 * motorConstant`
+
 ### Real World Data
 
-> TODO: mapping between u, PWM, angular velocity, determine thrust and torque coefficient
+> TODO: mapping between PWM and angular velocity, determine thrust and torque coefficient
+
+1. `x = actuator_setpoint[0, 1]` to `y = actuator_controls_0[-1, 1]`: $y=2x-1$
+2. `x = actuator_controls_0[-1, 1]` to `y = PWM[min, max]`: $y=\frac{x(y_{max}-y_{min})}{2}+\frac{y_{max}+y_{min}}{2}$
+3. `x = PWM[min, max]` & `y = relative_thrust[0, 1]`: $ay^2+(1-a)y-x=0$, where $a\in[0.25,0.35]$
 
 ## Matlab Files
 
