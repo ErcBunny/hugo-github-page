@@ -1,6 +1,6 @@
 ---
 title: "OmniHex"
-date: 2021-09-01T16:37:33+08:00
+date: 2022-03-27T16:37:33+08:00
 draft: false
 description: Adaptive Nonlinear Model Predictive Control for An Overactuated Hexacopter
 image: cover.png
@@ -20,6 +20,7 @@ tags:
 
 * [Presentation of Previous Work (English)](https://github.com/ErcBunny/sharedDocs/raw/main/Project%20Experience.pptx)
 * [Research Proposal (Chinese)](https://github.com/ErcBunny/sharedDocs/raw/main/omnihex.pdf)
+* [Midterm Summary (Chinese)](https://github.com/ErcBunny/sharedDocs/raw/main/中期报告.pdf)
 
 ---
 
@@ -30,8 +31,6 @@ tags:
 ---
 
 ## Dev Milestones
-
-![SITL](demo.png)
 
 1. [Dec 01 2021] Upgrade to ROS2: 100%
 2. [Dec 15 2021] PID and Newton-Euler Dynamics in SITL: 100%

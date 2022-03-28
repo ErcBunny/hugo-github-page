@@ -16,6 +16,16 @@ menu:
 ---
 
 ---
+## ABOUT THIS PAGE
+* Based on Github Pages and Hugo framework
+* I initially want it to be an online self-introduction to help with graduation application: it feels better updating websites than frequently editing and exporting [**CV**](https://github.com/ErcBunny/sharedDocs/raw/main/CV-yueqian-en.pdf) and [**project description**](https://github.com/ErcBunny/sharedDocs/raw/main/Project%20Experience.pptx). But I think it can be more than just that...
+* useful links:
+    * [theme stack documentation](https://docs.stack.jimmycai.com/zh/configuration/)
+    * [hugo documentation](https://gohugo.io/content-management/organization/)
+    * [icon download page](https://www.iconfont.cn/)
+    * [theme stack example](https://demo.stack.jimmycai.com/)
+
+---
 ## BASIC INFORMATION
 
 ### Contact
@@ -30,15 +40,6 @@ menu:
 * Research Interest: Robotics, Control, Perception, AI, Drones
 * Hobbies: Anime, music and a lot more
 
-### About This Page
-* Based on Github Pages and Hugo framework
-* I initially want it to be an online self-introduction to help with graduation application: it feels better updating websites than frequently editing and exporting [**CV**](https://github.com/ErcBunny/sharedDocs/raw/main/CV-yueqian-en.pdf) and [**project description**](https://github.com/ErcBunny/sharedDocs/raw/main/Project%20Experience.pptx). But I think it can be more than just that...
-* Thanks to Jimmy for creating this beautiful theme and allowing people without WEB experience to build such a nice website
-* useful links:
-    * [theme stack documentation](https://docs.stack.jimmycai.com/zh/configuration/)
-    * [hugo documentation](https://gohugo.io/content-management/organization/)
-    * [icon download page](https://www.iconfont.cn/)
-    * [theme stack example](https://demo.stack.jimmycai.com/)
 ---
 ## EDUCATION
 

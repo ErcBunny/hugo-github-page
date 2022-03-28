@@ -25,14 +25,8 @@ menu:
 * We're working on a private repo, it will go public someday
 
 ---
-## DRL AUTOPILOT
+## MISCELLANEOUS
 
-* [Open Source Repo](https://github.com/ErcBunny/DRL-Autopilot)
+* Thinking about the future: HKU or TUD or UZH
 
-* The post for tracking its progress is currently unavailable. Please go to the repo for more information.
-
----
-## GRADUATE SCHOOL APPLICATION
-
-* Deadlines are approaching... Working hard on it.
-
+* UTSZ Singing Competition
