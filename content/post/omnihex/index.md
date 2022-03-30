@@ -1,6 +1,6 @@
 ---
 title: "OmniHex"
-date: 2022-03-27T16:37:33+08:00
+date: 2022-03-30T16:37:33+08:00
 draft: false
 description: Adaptive Nonlinear Model Predictive Control for An Overactuated Hexacopter
 image: cover.png
@@ -32,17 +32,16 @@ tags:
 
 ## Dev Milestones
 
-1. [Dec 01 2021] Upgrade to ROS2: 100%
-2. [Dec 15 2021] PID and Newton-Euler Dynamics in SITL: 100%
-3. [Dec 31 2021] Real hardware drivers and maiden flight: 100%
-4. [Mar 01 2022] Adaptive MPC real flight: 20%
-   * controller architecture and design: 100%
-   * formulate MPC solver using acados: 100%
-   * test MPC solver in Python: 5%
-   * MPC node: 5%
-   * L1 adaptive enhancement: 0%
-5. [Apr 01 2022] Track trajectories and collect data: 0%
-6. [May 01 2022] Thesis writing: 0%
+1. Upgrade to ROS2: 100%
+2. PID and Newton-Euler Dynamics in SITL: 100%
+3. Real hardware drivers and maiden flight: 100%
+4. Controller architecture and design: 100%
+5. Formulate MPC solver using acados: 100%
+6. Test MPC solver in Python: 100%
+7. L1-MPC python simulation: 0%
+8. ROS L1-MPC node: 5%
+9. Track trajectories and collect data: 0%
+10. Thesis writing: 0%
 
 ## Environment Setup
 
