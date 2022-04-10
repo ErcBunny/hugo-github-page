@@ -1,6 +1,6 @@
 ---
 title: "OmniHex"
-date: 2022-03-30T16:37:33+08:00
+date: 2022-04-09T12:00:00+08:00
 draft: false
 description: Adaptive Nonlinear Model Predictive Control for An Overactuated Hexacopter
 image: cover.png
@@ -28,6 +28,8 @@ tags:
 
 {{< bilibili BV12P4y1g7dH 1 >}}
 
+![](xyzRPY.png) ![](wrench(dot).png) ![](optTime.png)
+
 ---
 
 ## Dev Milestones
@@ -38,7 +40,7 @@ tags:
 4. Controller architecture and design: 100%
 5. Formulate MPC solver using acados: 100%
 6. Test MPC solver in Python: 100%
-7. L1-MPC python simulation: 0%
+7. L1-MPC python simulation: 100%
 8. ROS L1-MPC node: 5%
 9. Track trajectories and collect data: 0%
 10. Thesis writing: 0%
@@ -65,8 +67,14 @@ git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git -b v1.0.4 ~/F
    * `vrpn-client-ros` publishes the built in message type `geometry-msgs`, it is OK to use debian release of `ros1-bridge`.
    * Building `ros1-bridge` form source enables extra support for custom message and service types but has conflicts with `ros-foxy-controller-manager-msgs`.
 8. Install mavros for data visualization: `sudo apt install ros-noetic-mavros* ros-noetic-mavlink`.
+9. Run `build_acados.sh` to set up the mpc code generation tool.
 
 ## Usage
+
+### L1-MPC
+
+1. Models and solvers are formulated in `ros2-workspace/src/adaptive_mpc/tools/omnihex.py`.
+2. Run `acados_generate_code.sh` to generate solver code and do numerical simulation.
 
 ### Simulation with Gazebo
 
