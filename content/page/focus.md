@@ -27,6 +27,4 @@ menu:
 ---
 ## MISCELLANEOUS
 
-* Thinking about the future: HKU or TUD or UZH
-
-* UTSZ Singing Competition
+* Career planning
