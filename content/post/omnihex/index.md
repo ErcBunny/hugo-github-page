@@ -16,11 +16,13 @@ tags:
 ---
 
 ---
-## LINKS
+## LINKS & DOWNLOADS
 
 * [Presentation of Previous Work (English)](https://github.com/ErcBunny/sharedDocs/raw/main/Project%20Experience.pptx)
 * [Research Proposal (Chinese)](https://github.com/ErcBunny/sharedDocs/raw/main/omnihex.pdf)
 * [Midterm Summary (Chinese)](https://github.com/ErcBunny/sharedDocs/raw/main/中期报告.pdf)
+* [Closing Presentation (Chinese)](https://github.com/ErcBunny/sharedDocs/raw/main/wide.pdf)
+* Thesis to be published on the official platform.
 
 ---
 
@@ -28,7 +30,7 @@ tags:
 
 {{< bilibili BV12P4y1g7dH 1 >}}
 
-![](xyzRPY.png) ![](wrench(dot).png) ![](optTime.png)
+![](numsim.svg) ![](gzsim.svg) ![](real.png)
 
 ---
 
@@ -41,9 +43,10 @@ tags:
 5. Formulate MPC solver using acados: 100%
 6. Test MPC solver in Python: 100%
 7. L1-MPC python simulation: 100%
-8. ROS L1-MPC node: 5%
-9. Track trajectories and collect data: 0%
-10. Thesis writing: 0%
+8. ROS L1-MPC node: 100%
+9. Track trajectories and collect data: 100%
+10. Thesis writing: 100%
+> Far from perfect, but done for now (May29, 2022)
 
 ## Environment Setup
 
@@ -67,7 +70,8 @@ git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git -b v1.0.4 ~/F
    * `vrpn-client-ros` publishes the built in message type `geometry-msgs`, it is OK to use debian release of `ros1-bridge`.
    * Building `ros1-bridge` form source enables extra support for custom message and service types but has conflicts with `ros-foxy-controller-manager-msgs`.
 8. Install mavros for data visualization: `sudo apt install ros-noetic-mavros* ros-noetic-mavlink`.
-9. Run `build_acados.sh` to set up the mpc code generation tool.
+9. Dynamixel-sdk `ros-foxy-dynamixel-*`
+10. Run `build_acados.sh` to set up the mpc code generation tool.
 
 ## Usage
 
@@ -75,6 +79,7 @@ git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git -b v1.0.4 ~/F
 
 1. Models and solvers are formulated in `ros2-workspace/src/adaptive_mpc/tools/omnihex.py`.
 2. Run `acados_generate_code.sh` to generate solver code and do numerical simulation.
+3. ROS2 Solver node is `ros2-workspace/src/adaptive_mpc/src/l1_mpc_main.cpp`. It has to be recompiled after regenerating the solver code (where control params are defined and stored).
 
 ### Simulation with Gazebo
 
@@ -117,17 +122,22 @@ ros2 run px4_ros_com offboard_control
 
 > Above mentioned steps are implemented in `run_simulation.sh`, run this script, take off to `{0, 0, 2.5}` and run `offboard.sh` to track the 8-shape trajectory.
 
+6. If MPC needed, then take off, use `ros2 run trajectory_generator min_ref_publisher 0 0 -2.5 1 0 0 0 0 0 0 0 0 0` to generate a plain state reference, and publish `/RunMpc` topic to actually run the MPC. This topic is designed to be published once for a time when you need to change the flag status.
+   
+   > TODO: use service instead
+
 ### Real World Flight
 
 * Port connections on NUC:
-   * dynamixel servos on `/dev/ttyUSB0 @ 115200`
-   * urtps_bridge on `/dev/ttyUSB1 @ 3000000` -> MCU `TELEM1`
-   * QGC/mavlink on `/dev/ttyACM0 @ any baud` (`ACM1` occurs after a reboot) -> MCU `microUSB`
+  
+  * dynamixel servos on `/dev/ttyUSB0 @ 115200`
+  * urtps_bridge on `/dev/ttyUSB1 @ 3000000` -> MCU `TELEM1`
+  * QGC/mavlink on `/dev/ttyACM0 @ any baud` (`ACM1` occurs after a reboot) -> MCU `microUSB`
 
 * About RC:
+  
   * switch A is the kill switch
   * switch F sets different flight modes (up: altitude, mid: position, down: acro).
-
 1. Setup the motion capture system.
    1. Open motive software and open the most recent project (Z-up configuration).
    2. Go to capture layout (upper-right corner) and delete default rigid bodies.
@@ -183,8 +193,8 @@ cd scripts
 3. Gazebo
    - N-Green-y, E-Red-x, U-Blue-z (world) 
 4. Arm rotation: see [Control Allocation of a Tilting Rotor Hexacopter](https://doi.org/10.3929/ethz-b-000224598)
-4. In SITL, PX4 NED x is aligned with Gazebo y
-4. In lab setting, PX4 FRD is algined with optitrack x
+5. In SITL, PX4 NED x is aligned with Gazebo y
+6. In lab setting, PX4 FRD is algined with optitrack x
 
 ## SW Model to SDF
 
@@ -231,13 +241,14 @@ cd scripts
 1. The main purpose of this package is to generate the communication bridge `micrortps_agent` from a template file `src/templates/uorb_rtps_message_ids.yaml`. The template file should be synced with PX4 via script `PX4-Autopilot/msg/tools/uorb_to_ros_rtps_ids.yaml`.
 
 2. There is also an example of off-board control available in `src/examples/offboard`. This example code is modified to generate a full position-pose trajectory as the function of timestamps.
-
+   
    1. circle
    2. 8-shape
-
+   
    > TODO: use input args or launch file to specify trajectory shape
 
 3. It also provides useful scripts for cleaning and building the workspace.
+   
    * Previously, `build_ros2_workspace.bash` is set to skip `custom_gazebo_plugins` because the latter depend on `px4_msgs`.
    * It is better to add `<depend>px4_msg</depend>` in `package.xml`. In this way we don't need to specify a order. Make sure to add `find_package(px4_msgs REQUIRED)` and `ament_target_dependencies(foo ...px4_msgs...)` in `CMakeLists.txt`.
 
@@ -257,6 +268,16 @@ cd scripts
 1. A package for generating trajectories in MPC framework and visualizing `TrajectorySetpoint_PubSubTopic`.
 2. Visualization is implemented in `rviz_translator.cpp`
 
+## adaptive_mpc
+
+1. Input topic: `/StateReferenceOcp`, horizon 1s, 20 + 1 nodes
+
+2. Outputs wrench setpoint
+
+3. Switches and flags:
+   
+   * `/RunMpc`: should be published once every time you wish to change the status of `run_mpc_`. It is switched to false if a solver reset has occurred.
+
 ## PX4 Tools and Miscellaneous
 
 1. Set the correct URL in `.gitmodules`.
@@ -266,9 +287,9 @@ cd scripts
 3. As we are using the `micrortps_bridge`, we need to build this module in PX4. We can specify this feature by uncommenting the `micrortps_bridge` line in `PX4-Autopilot/boards/px4/sitl/ctrlalloc.cmake`, which is the module configuration file for SITL targets. We can choose what modules to be built and what not to be built. The same rule applies to `.cmake` files for other boards.
 4. Add our custom model for gazebo simulation in `PX4-Autopilot/platforms/posix/cmake/sitl_target.cmake`.
 5. Add our airframe file (a model-dependent script for loading parameters and modules) for simulation in `PX4-Autopilot/ROMFS/init.d-posix/airframes` and make sure to add this file to the `CMakeLists.txt`.
-5. The airframe for real hardware is `init.d/airframes/6004_omni_hex`.
-5. A new mixer is in use: `omnihex.main.mix`.
-5. `mc_rate_control` isn't started in `rc.mc_apps` if `MIXER = omnihex`
+6. The airframe for real hardware is `init.d/airframes/6004_omni_hex`.
+7. A new mixer is in use: `omnihex.main.mix`.
+8. `mc_rate_control` isn't started in `rc.mc_apps` if `MIXER = omnihex`
 
 ## PX4 Messages
 
@@ -299,15 +320,15 @@ cd scripts
 
 1. The allocation matrix (actuator effectiveness) is implemented as a subclass of `ControlAllocationPseudoInverse` and `ModuleParams`. See `ActuatorEffectivenessOmniHex.cpp/hpp/params.c` for more detail. In PX4 convention, torque comes above force in a wrench.
 2. Add omniHex to enum classes, switch cases, and includes in `ControlAllocator.cpp/hpp`.
-2. Publish control signals to `actuator_controls_0` instead of `actuator_controls_4`, with `actuator_controls_0[3]` reserved for total thrust signal.
-3. Always check `CMakeLists.txt`
+3. Publish control signals to `actuator_controls_0` instead of `actuator_controls_4`, with `actuator_controls_0[3]` reserved for total thrust signal.
+4. Always check `CMakeLists.txt`
 
 ### flight_mode_manager
 
 1. This module takes care of controller setpoints in different flight modes.
 
 2. Switch to `FlightTaskIndex::ManualAcceleration` when in `vehicle_status_s::NAVIGATION_STATE_ACRO`. This feature is implemented in `FlightModeManager.cpp`.
-
+   
    > TODO: exclusive flight task for ACRO mode (not only pitch but full pose)
 
 3. `FlightTask.cpp/hpp`: add missing variables and functions that are not implemented for roll and pitch commands.
@@ -339,7 +360,7 @@ cd scripts
 1. `AllocatedActuatorMixer.cpp` now listens to `actuator_controls_0` instead of `actuator_controls_4`.
 
 2. ESC calibration parts in `px4io.cpp` and `mixer_module.cpp` are modified for `control[0]` to `control[6]`, except `control[3]`.
-
+   
    > TODO: test calibration function, <u>***make sure props are removed***</u>
 
 ## Motor-Propeller Model
