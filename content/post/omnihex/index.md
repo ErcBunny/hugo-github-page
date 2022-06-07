@@ -8,7 +8,7 @@ comments: true
 license: false
 hidden: false
 categories:
-    - Ongoing_Project
+    - Finished_Project
 tags:
     - UAV
     - MPC
