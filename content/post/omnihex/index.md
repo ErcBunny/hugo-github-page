@@ -27,7 +27,7 @@ tags:
 
 ## VIDEO DEMO
 
-{{< bilibili BV12P4y1g7dH 1 >}}
+{{< bilibili BV1ov4y1g7R6 1 >}}
 
 ![](numsim.svg) ![](gzsim.svg) ![](real.png)
 
