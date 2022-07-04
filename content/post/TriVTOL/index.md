@@ -39,5 +39,3 @@ tags:
 ## DETAILED REPORT
 
 * [View PDF (Chinese)](https://github.com/ErcBunny/sharedDocs/raw/main/Design%2C%20Control%20and%20Mixing%20of%203-Rotor%20VTOL%20UAVs.pdf)
-
-> Contents of the detailed report are in Chinese as they were made originally to support the Chinese presentation. A rework and translation of illustrations, diagrams and the report is in progress, but don't expect it to be finished soon. Best regards~

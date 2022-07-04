@@ -25,5 +25,3 @@ tags:
 * [Source Code](https://github.com/ErcBunny/DashToCones)
 
 * [View Project Report PDF (Chinese)](https://github.com/ErcBunny/sharedDocs/raw/main/DIP-d2c.pdf)
-
-> Contents of the detailed report are in Chinese as they were made originally to support the Chinese presentation. A rework and translation of illustrations, diagrams and the report is in progress, but don't expect it to be finished soon. Best regards~

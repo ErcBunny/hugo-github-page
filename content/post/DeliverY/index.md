@@ -36,5 +36,3 @@ tags:
 * [View Control and Electronic Circuit Design Scheme PDF (Chinese)](https://github.com/ErcBunny/sharedDocs/raw/main/Autonomous%20Delivery%20Drone%20electric-control%20report.pdf)
 
 * [View Structure Design Scheme PDF (Chinese)](https://github.com/ErcBunny/sharedDocs/raw/main/Autonomous%20Delivery%20Drone%20hardware%20report.pdf)
-
-> Contents of the detailed report are in Chinese as they were made originally to support the Chinese presentation. A rework and translation of illustrations, diagrams and the report is in progress, but don't expect it to be finished soon. Best regards~

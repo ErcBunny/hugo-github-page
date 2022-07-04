@@ -18,12 +18,11 @@ tags:
 ---
 ## LINKS & DOWNLOADS
 
-* [Presentation of Previous Work (English)](https://github.com/ErcBunny/sharedDocs/raw/main/Project%20Experience.pptx)
+* [Presentation of Early Work (English)](https://github.com/ErcBunny/sharedDocs/raw/main/Project%20Experience.pptx)
 * [Research Proposal (Chinese)](https://github.com/ErcBunny/sharedDocs/raw/main/omnihex.pdf)
 * [Midterm Summary (Chinese)](https://github.com/ErcBunny/sharedDocs/raw/main/中期报告.pdf)
 * [Closing Presentation (Chinese)](https://github.com/ErcBunny/sharedDocs/raw/main/wide.pdf)
-* Thesis to be published on the official platform.
-
+* [Thesis (Chinese)](https://1drv.ms/b/s!AtUoQjeuHMpihMpIooJgC1C_nQjvbw?e=b5tRRc)
 ---
 
 ## VIDEO DEMO
@@ -97,7 +96,7 @@ cd scripts
 source /opt/ros/foxy/setup.bash
 source ./ros2-workspace/install/setup.bash
 cd PX4-Autopilot
-PX4_NO_FOLLOW_MODE=1 px4_sitl_ctrlalloc gazebo_omni_hex
+PX4_NO_FOLLOW_MODE=1 make px4_sitl_ctrlalloc gazebo_omni_hex
 ```
 
 3. Run `micrortps_agent` over UDP.

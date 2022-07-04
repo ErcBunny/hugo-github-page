@@ -18,13 +18,6 @@ menu:
 > [**My Live Schedule**: scroll down to the bottom for recent updates (depend on onedrive service)](https://1drv.ms/b/s!AtUoQjeuHMpig740Vy5pLSMFnSgjmg?e=bNr23y)
 
 ---
-## BACHELOR THESIS
+## NOTHING REALLY
 
-* [Adaptive Model Predictive Control of An Overactuated Hexacopter](/p/omnihex)
-
-* We're working on a private repo, it will go public someday
-
----
-## MISCELLANEOUS
-
-* Career planning
+* Summer vacation!
