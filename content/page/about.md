@@ -37,9 +37,13 @@ menu:
 ---
 ## EDUCATION
 
+### Delft University of Technology
+* MSc. in Aerospace Engineering
+* From Sep 2022
+
 ### Harbin Institute of Technology, Shenzhen
-* Currently a fourth year student (09/2018 ~ 06/2022)
-* BEng. in Robotics and Autonomous Systems at graduation
+* (09/2018 ~ 06/2022)
+* BEng. in Robotics and Autonomous Systems, Cum Laude
 * Admitted to UCB Global Access Program, but cancelled due to COVID
 * GPA: 88/100
 * TOEFL: 110/120, GRE: 160(V)+168(Q)+4(AW)
