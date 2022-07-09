@@ -52,6 +52,9 @@ menu:
 
 ---
 ## AWARDS
+### 2022
+* Bachelor Thesis Best Paper Award, Jun 2022
+* Cum Laude, BEng, Jun 2022
 ### 2021
 * [Second Prize, HITSZ Engineering Contest in Drone Delivery, Mar 2021](/p/autonomous-delivery-drone)
 * Third Prize RMB2000, HITSZ Outstanding Student Scholarship, Nov 2021
